@@ -4,6 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.pendapetro.presentation.ui.screen.home_screen.HomeScreen
+import com.example.pendapetro.presentation.ui.screen.home_screen.data.HomeScreenObject
+import com.example.pendapetro.presentation.ui.screen.test_sreen.TestScreen
+import com.example.pendapetro.presentation.ui.screen.test_sreen.data.TestScreenObject
 import com.example.pendapetro.ui.theme.PendaPetroTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,8 +18,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            PendaPetroTheme {
+            val navController = rememberNavController()
 
+            PendaPetroTheme {
+                NavHost(
+                    navController = navController,
+                    startDestination = HomeScreenObject,
+                ) {
+                    composable<HomeScreenObject> {
+                        HomeScreen()
+                    }
+                    composable<TestScreenObject> {
+                        TestScreen()
+                    }
+                }
             }
         }
     }
