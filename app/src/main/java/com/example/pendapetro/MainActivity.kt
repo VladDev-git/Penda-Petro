@@ -25,16 +25,37 @@ class MainActivity : ComponentActivity() {
             PendaPetroTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = ResultScreenObject,
+                    startDestination = HomeScreenObject,
                 ) {
                     composable<HomeScreenObject> {
-                        HomeScreen()
+                        HomeScreen(
+                            onNavQuestionScreen = {
+                                navController.navigate(TestScreenObject)
+                            }
+                        )
                     }
                     composable<TestScreenObject> {
-                        TestScreen()
+                        TestScreen(
+                            onNavResultScreen = {
+                                navController.navigate(ResultScreenObject) {
+                                    popUpTo(HomeScreenObject) { inclusive = true }
+                                }
+                            },
+                        )
                     }
                     composable<ResultScreenObject> {
-                        ResultScreen()
+                        ResultScreen(
+                            onNavHomeScreen = {
+                                navController.navigate(HomeScreenObject) {
+                                    popUpTo(HomeScreenObject) { inclusive = true }
+                                }
+                            },
+                            onNavRetakeTest = {
+                                navController.navigate(TestScreenObject) {
+                                    popUpTo(HomeScreenObject) { inclusive = true }
+                                }
+                            }
+                        )
                     }
                 }
             }

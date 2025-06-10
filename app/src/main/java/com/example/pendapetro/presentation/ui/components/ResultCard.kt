@@ -33,7 +33,9 @@ import com.example.pendapetro.ui.theme.gradients.MangoLimeGradientBackground
 
 @Composable
 fun ResultCard(
-
+    score: Int = 0,
+    onNavHomeScreen: () -> Unit,
+    onRetakeTest: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -48,7 +50,7 @@ fun ResultCard(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Image(
-                painter = painterResource(id = R.drawable.category_1_img),
+                painter = painterResource(id = R.drawable.result_img),
                 contentDescription = null,
                 modifier = Modifier
                     .size(110.dp)
@@ -83,7 +85,7 @@ fun ResultCard(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "3/7",
+                    text = "$score/7",
                     fontSize = 30.sp,
                     lineHeight = 34.sp,
                     color = Color.White,
@@ -101,7 +103,9 @@ fun ResultCard(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "¡Seguro que puedes hacerlo mejor!",
+                    text = if (score >= 7) "¡Guau! ¡Tienes un gran potencial!"
+                    else if (score in 3..6)"¡Sigue así! Un poco más y te convertirás en un inversor experimentado."
+                    else "¡Seguro que puedes hacerlo mejor!",
                     fontSize = 16.sp,
                     lineHeight = 21.sp,
                     color = Color.Black,
@@ -116,7 +120,7 @@ fun ResultCard(
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(62.dp))
                     .MangoLimeGradientBackground()
-                    .clickable {  }
+                    .clickable { onRetakeTest() }
                     .padding(vertical = 24.dp)
             ) {
                 Text(
@@ -136,7 +140,7 @@ fun ResultCard(
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(62.dp))
                     .MangoLimeGradientBackground()
-                    .clickable {  }
+                    .clickable { onNavHomeScreen() }
                     .padding(vertical = 24.dp)
             ) {
                 Text(

@@ -21,9 +21,9 @@ fun Modifier.MangoLimeGradientBackground(): Modifier {
             drawRect(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFFFFC107),  // манговий жовтий
+                        Color(0xFFFFC107),
                         Color(0xFFCDDC39),
-                        Color(0xFFB2FF59),  // лаймовий зелений
+                        Color(0xFFB2FF59),
                     ),
                     startY = size.height,
                     endY = 0f

@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pendapetro.data.entitys.Category
 import com.example.pendapetro.ui.theme.CategoryItemBackgroundSelected
 import com.example.pendapetro.ui.theme.DarkBlue
 import com.example.pendapetro.ui.theme.TextBlackYellow
@@ -30,10 +31,8 @@ import com.example.pendapetro.ui.theme.customFont_Ruberoid_ExtraBold
 
 @Composable
 fun CategoryItemButton(
-    label: String,
-    description: String,
-    imgId: Int,
-    onClick: () -> Unit,
+    category: Category,
+    onClick: (Category) -> Unit,
 ) {
     Box (
         modifier = Modifier
@@ -45,7 +44,7 @@ fun CategoryItemButton(
                 color = DarkBlue,
                 shape = RoundedCornerShape(16.dp)
             )
-            .clickable { onClick() }
+            .clickable { onClick(category) }
             .padding(10.dp),
     ) {
         Row(
@@ -53,7 +52,7 @@ fun CategoryItemButton(
                 .fillMaxWidth(),
         ) {
             Image(
-                painter = painterResource(id = imgId),
+                painter = painterResource(id = category.categoryIcon),
                 contentDescription = null,
                 modifier = Modifier
                     .padding(top = 10.dp, end = 3.dp)
@@ -62,7 +61,7 @@ fun CategoryItemButton(
             Spacer(modifier = Modifier.width(10.dp))
             Column {
                 Text(
-                    text = label,
+                    text = category.categoryName,
                     fontSize = 16.sp,
                     lineHeight = 21.sp,
                     color = TextBlackYellow,
@@ -71,7 +70,7 @@ fun CategoryItemButton(
                 )
                 Spacer(modifier = Modifier.height(7.dp))
                 Text(
-                    text = description,
+                    text = category.categoryDescription,
                     fontSize = 12.sp,
                     color = TextGreyYellow,
                     fontWeight = FontWeight(400),
